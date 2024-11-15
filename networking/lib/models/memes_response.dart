@@ -1,0 +1,85 @@
+class Memes {
+  bool? success;
+  Data? data;
+
+  Memes({this.success, this.data});
+
+  Memes.fromJson(Map<String, dynamic> json) {
+    success = json['success'];
+    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['success'] = success;
+    if (this.data != null) {
+      data['data'] = this.data!.toJson();
+    }
+    return data;
+  }
+}
+
+class Data {
+  List<Meme>? memes;
+
+  Data({this.memes});
+
+  Data.fromJson(Map<String, dynamic> json) {
+    if (json['memes'] != null) {
+      memes = <Meme>[];
+      json['memes'].forEach((v) {
+        memes!.add(Meme.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (memes != null) {
+      data['memes'] = memes!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Meme {
+  String? id;
+  String? name;
+  String? url;
+  int? width;
+  int? height;
+  int? boxCount;
+  int? captions;
+
+  Meme({
+    this.id,
+    this.name,
+    this.url,
+    this.width,
+    this.height,
+    this.boxCount,
+    this.captions,
+  });
+
+  Meme.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    url = json['url'];
+    width = json['width'];
+    height = json['height'];
+    boxCount = json['box_count'];
+    captions = json['captions'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['url'] = url;
+    data['width'] = width;
+    data['height'] = height;
+    data['box_count'] = boxCount;
+    data['captions'] = captions;
+    return data;
+  }
+}
